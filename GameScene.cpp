@@ -66,6 +66,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	objSkydome->SetModel(modelSkydome);
 	objGround->SetModel(modelGround);
 	objFighter->SetModel(modelFighter);
+
+	modelSphere = Model::CreateFromOBJ("sphere");
+	objSphere = Object3d::Create();
+	objSphere->SetModel(modelSphere);
+	objFighter->SetPosition({ +1,0,0 });
+	objSphere->SetPosition({ -1,1,0 });
+
 }
 
 void GameScene::Update()
@@ -75,6 +82,7 @@ void GameScene::Update()
 	objSkydome->Update();
 	objGround->Update();
 	objFighter->Update();
+	objSphere->Update();
 
 	debugText.Print("AD: move camera LeftRight", 50, 50, 1.0f);
 	debugText.Print("WS: move camera UpDown", 50, 70, 1.0f);
@@ -90,7 +98,7 @@ void GameScene::Draw()
 	// 背景スプライト描画前処理
 	Sprite::PreDraw(cmdList);
 	// 背景スプライト描画
-	//spriteBG->Draw();
+	spriteBG->Draw();
 
 	/// <summary>
 	/// ここに背景スプライトの描画処理を追加できる
@@ -107,9 +115,10 @@ void GameScene::Draw()
 	Object3d::PreDraw(cmdList);
 
 	// 3Dオブクジェクトの描画
-	objSkydome->Draw();
-	objGround->Draw();
+	//objSkydome->Draw();
+	//objGround->Draw();
 	objFighter->Draw();
+	objSphere->Draw();
 
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
